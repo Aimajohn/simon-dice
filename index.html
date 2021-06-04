@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <h1>Juego Simon dice</h1>
     <div class="gameboard">
         <div id="celeste" class="color celeste left" data-color="celeste"></div>
         <div id="violeta" class="color violeta left" data-color="violeta"></div>
@@ -17,6 +18,7 @@
         <div id="verde" class="color verde right" data-color="verde"></div>
         <button id="btnEmpezar" class="btn-star" onclick="empezarjuego()">Empezar Juego!</button>
     </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         
         const celeste = document.getElementById("celeste")
@@ -24,6 +26,7 @@
         const verde = document.getElementById("verde")
         const naranja = document.getElementById("naranja")
         const btnEmpezar = document.getElementById("btnEmpezar")
+        const ULTIMO_NIVEL = 10
         class Juego {
             constructor(){
                 this.inicializar()
@@ -31,7 +34,7 @@
                 setTimeout(this.siguienteNivel, 500)
             }
             inicializar(){
-                btnEmpezar.classList.add('none')
+                btnEmpezar.classList.toggle('none')
                 this.nivel = 1
                 this.colores = {
                     celeste,
@@ -39,8 +42,9 @@
                     naranja,
                     verde
                 }
-                this.seleccion= this.seleccion.bind(this)
+                this.inicializar = this.inicializar.bind(this)
                 this.siguienteNivel= this.siguienteNivel.bind(this)
+                this.seleccion= this.seleccion.bind(this)
             }
             secuencia(){
                 this.secuencia = new Array(10).fill(0).map(n => Math.floor(Math.random()*4))
@@ -99,8 +103,28 @@
                 this.colores.violeta.removeEventListener('click', this.seleccion)
                 this.colores.verde.removeEventListener('click', this.seleccion)
             }
+            perdioJuego(){
+                swal ( "Perdiste!" ,  "No te rindas!  vuelve a intentarlo" ,  "error" )
+                .then(()=>{
+                    this.inicializar()
+                })
+            }
+            ganateElJuego(){
+                swal ( "Ganaste!" ,  "Eres muy bueno, increible!" ,  "success",{
+                    buttons:{cancel:"Volver a Jugar"}
+                } )
+                .then(()=>{
+                    this.inicializar()
+                })
+            }
+            nivelSuperado(){
+                        swal ( "Nivel completado" ,  "Eres muy bueno, increible!" ,  "success", {buttons: "Siguiente Nivel"} )
+                        .then(()=>{
+                            setTimeout(this.siguienteNivel, 700)
+
+                        })
+            }
             seleccion(ev){
-                const ULTIMO_NIVEL = this.secuencia.length
                 const colorSeleccionado = ev.target.dataset.color
                 const numeroSeleccionado = this.transformarANumero(colorSeleccionado)
                 this.iluminar(colorSeleccionado)
@@ -115,10 +139,10 @@
                         this.nivel++
                         this.eliminarEventosClick()
                         if(this.nivel>ULTIMO_NIVEL+1){
-                            console.log("ganaste")
+                            this.ganateElJuego()
                         }
                         else{
-                            setTimeout(this.siguienteNivel, 1000)
+                            this.nivelSuperado()
                         }
                     }
                     else{
@@ -127,7 +151,7 @@
                 }
                 else{
                     this.eliminarEventosClick()
-                    console.log("perdiste")
+                    this.perdioJuego()
                 }
             }
         }
