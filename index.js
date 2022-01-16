@@ -137,3 +137,4 @@ class Juego {
 function empezarjuego(){
     window.juego = new Juego()
 }
+console.warn('No juegues conmigo bb')
