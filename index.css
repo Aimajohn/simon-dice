@@ -30,8 +30,17 @@
     max-height: 500px; */
     flex-wrap: wrap;
     justify-content: center;
-    margin: 100px auto;
+    margin-inline:  auto;
     position: relative;
+}
+.mainBox{
+    margin-top: 50px;
+    height: calc(100vh - 50px) ;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 .color{
     width: 50%;

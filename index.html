@@ -14,13 +14,16 @@
     <header class="headerBundle">
         <h1>Juego Simon dice</h1>
     </header>
-    <div class="gameboard">
-        <div id="celeste" class="color celeste left" data-color="celeste"></div>
-        <div id="violeta" class="color violeta left" data-color="violeta"></div>
-        <div id="naranja" class="color naranja right" data-color="naranja"></div>
-        <div id="verde" class="color verde right" data-color="verde"></div>
-        <button type="button" id="btnEmpezar" class="btn-star" onclick="empezarjuego()">Empezar Juego!</button>
-    </div>
+    <main class="mainBox">
+        <div class="gameboard">
+            <div id="celeste" class="color celeste left" data-color="celeste"></div>
+            <div id="violeta" class="color violeta left" data-color="violeta"></div>
+            <div id="naranja" class="color naranja right" data-color="naranja"></div>
+            <div id="verde" class="color verde right" data-color="verde"></div>
+            <button type="button" id="btnEmpezar" class="btn-star" onclick="empezarjuego()">Empezar Juego!</button>
+        </div>
+
+    </main>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../simon-dice/index.js"></script>
 </body>

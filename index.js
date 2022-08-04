@@ -8,7 +8,7 @@ class Juego {
     constructor(){
         this.inicializar()
         this.secuencia()
-        setTimeout(this.siguienteNivel, 500)
+        setTimeout(this.siguienteNivel, 450)
     }
     inicializar(){
         btnEmpezar.classList.toggle('none')
@@ -57,13 +57,13 @@ class Juego {
     iluminarSecuencia(){
         for (let i = 0; i<this.nivel; i++){
             const color = this.transformarAColor(this.secuencia[i])
-            setTimeout(()=>this.iluminar(color), i*1000)
+            setTimeout(()=>this.iluminar(color), i*750)
         } 
         this.identificar()
     }
     iluminar(ilu){
         this.colores[ilu].classList.add("light")
-        setTimeout(()=>this.apagar(ilu), 350)
+        setTimeout(()=>this.apagar(ilu), 300)
     }
     apagar(color){
         this.colores[color].classList.remove("light")
@@ -99,7 +99,7 @@ class Juego {
     nivelSuperado(){
                 swal ( "Nivel completado" ,  "Eres muy bueno, increible!" ,  "success", {buttons: "Siguiente Nivel"} )
                 .then(()=>{
-                    setTimeout(this.siguienteNivel, 700)
+                    setTimeout(this.siguienteNivel, 600)
 
                 })
     }
@@ -108,12 +108,7 @@ class Juego {
         const numeroSeleccionado = this.transformarANumero(colorSeleccionado)
         this.iluminar(colorSeleccionado)
         if (numeroSeleccionado == this.secuencia[this.subnivel]){
-            console.log(this.secuencia)
-            console.log(numeroSeleccionado)
-            console.log(this.secuencia[this.subnivel])
-            console.log(this.subnivel)
             this.subnivel++
-            console.log(this.subnivel)
             if (this.subnivel === this.nivel){
                 this.nivel++
                 this.eliminarEventosClick()
